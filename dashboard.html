@@ -57,6 +57,124 @@
 
     <script>
         let allIssues = [];
+
+// data loading function from API
+window.onload = async () => {
+    toggleLoading(true);
+    try {
+        const res = await fetch('https://phi-lab-server.vercel.app/api/v1/lab/issues');
+        const data = await res.json();
+        
+        allIssues = data.data || []; 
+        displayIssues(allIssues);
+    } catch (err) {
+        console.error("Error fetching data:", err);
+    } finally {
+        toggleLoading(false);
+    }
+};
+
+// card's render function
+function displayIssues(issues) {
+    const grid = document.getElementById('issuesGrid');
+    const countText = document.getElementById('issueCount');
+    
+    if (!grid) return; // Grid না থাকলে থামিয়ে দাও
+
+    grid.innerHTML = "";
+    countText.innerText = `${issues.length} Issues`;
+
+    issues.forEach(issue => {
+        // solve border color changing(Open=Green, Closed=Purple)
+        const status = issue.status ? issue.status.toLowerCase() : 'open';
+        const borderColor = status === 'open' ? 'border-t-green-500' : 'border-t-purple-600';
+        
+        //id's safety
+        const rawId = issue._id || issue.id || '000';
+        const displayId = String(rawId).slice(-3);
+
+        const card = document.createElement('div');
+        card.className = `bg-white p-5 rounded-xl border border-gray-100 border-t-4 ${borderColor} shadow-sm hover:shadow-md transition cursor-pointer`;
+        card.onclick = () => showDetails(rawId);
+
+        card.innerHTML = `
+            <div class="flex justify-between mb-4">
+                <span class="text-lg">⚙️</span>
+                <span class="text-[10px] font-bold px-2 py-1 rounded bg-gray-100 uppercase">${issue.priority || 'Low'}</span>
+            </div>
+            <h3 class="font-bold text-gray-800 mb-2 line-clamp-2">${issue.title || 'No Title'}</h3>
+            <p class="text-sm text-gray-500 mb-4 line-clamp-2">${issue.description || 'No Description'}</p>
+            <div class="flex gap-2 mb-4">
+                <span class="text-[10px] bg-red-50 text-red-500 px-2 py-1 rounded">🐞 ${issue.label || 'Bug'}</span>
+                <span class="text-[10px] bg-orange-50 text-orange-600 px-2 py-1 rounded">🙋 ${issue.category || 'General'}</span>
+            </div>
+            <div class="flex justify-between items-center text-[11px] text-gray-400 border-t pt-3">
+                <span>#${displayId} by ${issue.author || 'Admin'}</span>
+                <span>${issue.createdAt ? new Date(issue.createdAt).toLocaleDateString() : 'N/A'}</span>
+            </div>
+        `;
+        grid.appendChild(card);
+    });
+}
+
+// filtering logic (Active button challenge)
+function filterIssues(status) {
+    const buttons = document.querySelectorAll('.tab-btn');
+    buttons.forEach(btn => {
+        btn.classList.remove('bg-[#4b00ff]', 'text-white');
+        btn.classList.add('text-gray-500');
+    });
+    event.target.classList.add('bg-[#4b00ff]', 'text-white');
+
+    if (status === 'all') {
+        displayIssues(allIssues);
+    } else {
+        const filtered = allIssues.filter(item => (item.status || '').toLowerCase() === status);
+        displayIssues(filtered);
+    }
+}
+
+// search logic
+async function handleSearch() {
+    const query = document.getElementById('searchInput').value;
+    if (!query) return;
+
+    toggleLoading(true);
+    const res = await fetch(`https://phi-lab-server.vercel.app/api/v1/lab/issues/search?q=${query}`);
+    const data = await res.json();
+    displayIssues(data.data || []);
+    toggleLoading(false);
+}
+
+// modal handleing
+async function showDetails(id) {
+    const res = await fetch(`https://phi-lab-server.vercel.app/api/v1/lab/issue/${id}`);
+    const data = await res.json();
+    const issue = data.data;
+
+    const modal = document.getElementById('issueModal');
+    const content = document.getElementById('modalContent');
+
+    content.innerHTML = `
+        <h2 class="text-2xl font-bold mb-4">${issue.title}</h2>
+        <p class="text-gray-600 mb-6">${issue.description}</p>
+        <div class="grid grid-cols-2 gap-4 text-sm">
+            <p><strong>Status:</strong> ${issue.status}</p>
+            <p><strong>Priority:</strong> ${issue.priority}</p>
+            <p><strong>Author:</strong> ${issue.author}</p>
+            <p><strong>Label:</strong> ${issue.label}</p>
+        </div>
+    `;
+    modal.classList.remove('hidden');
+}
+
+function closeModal() {
+    document.getElementById('issueModal').classList.add('hidden');
+}
+
+function toggleLoading(show) {
+    document.getElementById('loading').classList.toggle('hidden', !show);
+}
     </script>
 </body>
-    
+</html>
