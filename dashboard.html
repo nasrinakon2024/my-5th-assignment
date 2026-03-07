@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GitHub Issues Tracker - Dashboard</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body class="bg-gray-50">
+    <nav class="bg-white border-b px-6 py-4 flex justify-between items-center sticky top-0 z-1">
+        <div class="flex items-center gap-2">
+            <img src="https://cdn-icons-png.flaticon.com/512/25/25231.png" class="w-8" alt="Logo">
+            <h1 class="font-bold text-xl hidden md:block">GitHub Issues Tracker</h1>
+        </div>
+        <div class="flex gap-2">
+            <input id="searchInput" type="text" placeholder="Search Issues..." class="border rounded-lg px-4 py-2 w-48 m:w-80 outline-none">
+            <button onclick="handleSearch()" class="bg--[#4b00ff] text-white px-4 py-2 rounded-lg font-semibold hover:bg-blue-700 transition">+ New Issue</button>
+        </div>
+    </nav>
+
+    <main class="max-w-7xl mx-auto p-6">
+        <div class="bg-white p-1 inline-flex rounded-xl border mb-6">
+            <button onclick="filterIssues('all')" class="tab-btn active bg-[#4b00ff] text-white px-8 py-2 rounded-lg font-medium">All</button>
+            <button onclick="filterIssues('open')" class="tab-btn px-8 py-2 rounded-lg font-medium text-gray-500">Open</button>
+            <button onclick="filterIssues('closed')" class="tab-btn px-8 py-2 rounded-lg font-medium text-gray-500">Closed</button>
+        </div>
+
+        <div class="bg-white p-6 rounded-xl border flex flex-col md:flex-row justify-between items-center mb-8">
+            <div class="flex items-center gap-4">
+                <div class="bg-indigo-50 p-3 rounded-full text-2xl">📋</div>
+            </div>
+            <h2 id="issueCount" class="text-xl font-bold">0 Issues</h2>
+                <p class="text-gray-500 text-sm">Track and manage your project issues</p>
+    </div>
+        </div>
+
+        <div class="flex gap-6 mt-4 md:mt-0">
+            <div class="flex items-center gap-2"><span class="w-3 h-3 rounded-full bg-green-500"></span>Open</div>
+            <div class="flex items-center gap-2"><span class="w-3 h-3 rounded-full bg-green-600"></span>Closed</div>
+        </div>
+    </div>
+    
+    <div id="loading" class="hidden text-center py-20">
+        <div class="animate-spin rounded-full h-12 w-12 border-b-4 border-[#4b00ff] mx-auto"></div>
+    </div>
+
+    <div id="issuesGrid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6"></div>
+    </main>
+
+    <div class="issueModal" class="fixed inset-0 bg-black bg-opacity-50 hidden flex items-center justify-center p-4 z-50">
+        <div class="bg-white rounded-2xl max-w-lg w-full p-8 relative">
+            <button onclick="closeModal()" class="absolute top-4 right-4 text-2xl">&times;</button>
+            <div id="modalContent"></div>
+        </div>
+    </div>
+
+    <script>
+        let allIssues = [];
+    </script>
+</body>
+    

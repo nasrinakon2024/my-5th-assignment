@@ -24,3 +24,4 @@ loginForm.addEventListener('submit', function(e){
 usernameInput.addEventListener('focus', () =>{
     usernameInput.classList.add('border-indigo-500');
 })
+
