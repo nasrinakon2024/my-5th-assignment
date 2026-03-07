@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GitHub Issues Tracker - Login</title>
+     <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+<style>
+    body{background-color: #f8faff;}
+</style>
+</head>
+<body class="flex items-center justify-center min-h-screen">
+    <div class="bg-white p-8 rounded-lg shadow-md border border-gray-100 w-full max-w-md mx-auto mt-10">
+        <div class="text-center mb-6">
+            <div class="flex justify-center mb-4">
+                <i class="fa-brands fa-github text-6xl text-[#1c2128]"></i>
+            </div>
+                <h1 class="text-2xl font-boldtext-gray-800">GitHub Issues Tracker</h1>
+                <p class="text-sm text-gray-500 mt-1">Sign in to manage your issues</p>
+        </div>
+        <form id="loginForm" class="space-y-4">
+    <div>
+    <label class="block text-sm font-semibold text-gray-700 mb-1">Username</label>
+    <input type="text" id="username" placeholder="Enter Username" 
+    class="w-full px-4 py-2 border border-gray-200 rounded-md focus:outline-none focus:ring2 focus:ring-indigo-500">
+    <p class="text-xs text-purple-600 mt-1">Default: admin</p>
+    </div>
+        <div>
+            <label class="block text-sm font-semibold text-gray-700 mb-1">Password</label>
+            <input type="password" id="password" placeholder="Enter Password" 
+            class="w-full px-4 py-2 border border-gray-200 rounded-md flex:outline-none focus:ring2 focus:ring-indigo-500">
+            <p class="text-xs text-purple-600 mt-1">Default: admin123</p>
+        </div>
+        <button type="submit" class="w-full bg-[#5800ff] text-white font-semibold py-2.5 rounded-md hover:bg-indigo-700 
+        transition duration-200">Sign In</button></form>
+
+        <div class="relative my-6">
+            <div class="absolute inset-0 flex items-center">
+                <div class="w-full border-t border-gray-200"></div>
+            </div>
+                <div class="relative flex justify-center text-xs uppercase">
+                    <span class="bg-white px-2 text-gray-400">OR</span>
+                </div>
+        </div>
+
+        <div class="bg-gray-50 p-4 rounded-md text-center">
+            <p class="text-xs text-gray-400 mb-2 font-medium">Demo Credentials:</p>
+            <p class="text-sm text-gray-700 font-bold">Username <span class="font-normal">admin</span></p>
+            <p class="text-sm text-gray-700 font-bold">Password <span class="font-normal">admin123</span></p>
+        </div>
+    </div>
+
+    <script>
+        //simple logic for sign in
+        document.getElementById ('loginForm') .addEventListener ('submit', function(e){
+            e.preventDefault();
+            const user = document.getElementById('username').value;
+            const user = document.getElementById('password').value;
+
+            if(user === 'admin' && pass === 'admin123'){
+                alert('Login Successful!');
+            }
+            // window.location.href = "dashboard.html";
+            else{
+                alert('Invalid Credentials! Please use the demo login.');
+            }
+        });
+    </script>
+</body>
+</html>
