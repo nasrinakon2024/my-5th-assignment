@@ -14,8 +14,8 @@
             <h1 class="font-bold text-xl hidden md:block">GitHub Issues Tracker</h1>
         </div>
         <div class="flex gap-2">
-            <input id="searchInput" type="text" placeholder="Search Issues..." class="border rounded-lg px-4 py-2 w-48 m:w-80 outline-none">
-            <button onclick="handleSearch()" class="bg--[#4b00ff] text-white px-4 py-2 rounded-lg font-semibold hover:bg-blue-700 transition">+ New Issue</button>
+            <input id="searchInput" type="text" placeholder="🔍︎Search Issues..." class="border rounded-lg px-4 py-2 w-48 m:w-80 outline-none">
+            <button onclick="handleSearch()" class="bg--[#4b00ff] text-white px-4 py-2 rounded-lg font-semibold bg-blue-700 hover:bg-purple-800">+ New Issue</button>
         </div>
     </nav>
 
@@ -79,7 +79,7 @@ function displayIssues(issues) {
     const grid = document.getElementById('issuesGrid');
     const countText = document.getElementById('issueCount');
     
-    if (!grid) return; // Grid না থাকলে থামিয়ে দাও
+    if (!grid) return; 
 
     grid.innerHTML = "";
     countText.innerText = `${issues.length} Issues`;
