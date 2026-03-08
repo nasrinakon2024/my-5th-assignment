@@ -151,6 +151,27 @@
         </div>
     </div>
 
-    
+    <script>
+        document.getElementById("myBtn")
+        .addEventListener("click", function(){
+
+            const nameInput = document.getElementById("user-name");
+            const userName = nameInput.value;
+            console.log(userName);
+
+            const passInput = document.getElementById("user-pass");
+            const password = passInput.value;
+            console.log(password);
+
+            if (userName == "admin" && password == "admin123") {
+                alert("Login Successfull");
+                window.location.assign("home.html");
+            }
+
+            else{
+                alert("Login Failed and Try Again");
+            }
+        })
+    </script>
 </body>
 </html>
