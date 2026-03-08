@@ -61,6 +61,7 @@
 
             if(user === 'admin' && pass === 'admin123'){
                 alert('Login Successful!');
+                 
             }
             // window.location.href = "dashboard.html";
             else{
@@ -84,6 +85,7 @@ loginForm.addEventListener('submit', function(e){
 
     if (username === defaultUser && password === defaultPass){
         alert("Login Successfull! Redirecting...");
+       window.location.href("dashboard.html");
     }
     else{
         alert("Invalid Username or Password. Please use the demo credentials.");
