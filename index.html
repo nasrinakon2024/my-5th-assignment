@@ -3,99 +3,43 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>GitHub Issues Tracker - Login</title>
-     <script src="https://cdn.tailwindcss.com"></script>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
-    
-<style>
-    body{background-color: #f8faff;}
-</style>
+    <title>GitHub Issues Tracker</title>
+
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background-color: #f4f7f9;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        .login-box {
+            background: #f4f7f9;
+            padding: 40px;
+            border-radius: 8px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            width: 400px;
+            text-align: center;
+        }
+
+        .logo{
+            width: 70px;
+            height: 70px;
+            margin-bottom: 20px;
+        }
+
+        
+    </style>
 </head>
-<body class="flex items-center justify-center min-h-screen">
-    <div class="bg-white p-8 rounded-lg shadow-md border border-gray-100 w-full max-w-md mx-auto mt-10">
-        <div class="text-center mb-6">
-            <div class="flex justify-center mb-4">
-                <i class="fa-brands fa-github text-6xl text-[#1c2128]"></i>
-            </div>
-                <h1 class="text-2xl font-boldtext-gray-800">GitHub Issues Tracker</h1>
-                <p class="text-sm text-gray-500 mt-1">Sign in to manage your issues</p>
-        </div>
-        <form id="loginForm" class="space-y-4">
-    <div>
-    <label class="block text-sm font-semibold text-gray-700 mb-1">Username</label>
-    <input type="text" id="username" placeholder="Enter Username" 
-    class="w-full px-4 py-2 border border-gray-200 rounded-md focus:outline-none focus:ring2 focus:ring-indigo-500">
-    <p class="text-xs text-purple-600 mt-1">Default: admin</p>
-    </div>
-        <div>
-            <label class="block text-sm font-semibold text-gray-700 mb-1">Password</label>
-            <input type="password" id="password" placeholder="Enter Password" 
-            class="w-full px-4 py-2 border border-gray-200 rounded-md flex:outline-none focus:ring2 focus:ring-indigo-500">
-            <p class="text-xs text-purple-600 mt-1">Default: admin123</p>
-        </div>
-        <button type="submit" class="w-full bg-[#5800ff] text-white font-semibold py-2.5 rounded-md hover:bg-indigo-700 
-        transition duration-200">Sign In</button></form>
-
-        <div class="relative my-6">
-            <div class="absolute inset-0 flex items-center">
-                <div class="w-full border-t border-gray-200"></div>
-            </div>
-                <div class="relative flex justify-center text-xs uppercase">
-                    <span class="bg-white px-2 text-gray-400">OR</span>
-                </div>
-        </div>
-
-        <div class="bg-gray-50 p-4 rounded-md text-center">
-            <p class="text-xs text-gray-400 mb-2 font-medium">Demo Credentials:</p>
-            <p class="text-sm text-gray-700 font-bold">Username <span class="font-normal">admin</span></p>
-            <p class="text-sm text-gray-700 font-bold">Password <span class="font-normal">admin123</span></p>
-        </div>
-    </div>
-
-    <script>
-        //simple logic for sign in
-        document.getElementById ('loginForm') .addEventListener ('submit', function(e){
-            e.preventDefault();
-            const user = document.getElementById('username').value;
-            const user = document.getElementById('password').value;
-
-            if(user === 'admin' && pass === 'admin123'){
-                alert('Login Successful!');
-                 
-            }
-            // window.location.href = "dashboard.html";
-            else{
-                alert('Invalid Credentials! Please use the demo login.');
-            }
-        });
-
-        const loginForm = document.getElementById('loginForm');
-const usernameInput = document.getElementById('username');
-const passwordInput = document.getElementById('password');
-
-//form submit handler
-
-loginForm.addEventListener('submit', function(e){
-    e.preventDefault();
-
-    const username = usernameInput.value.trim();
-    const password = passwordInput.value.trim();
-    const defaultUser = 'admin';
-    const defaultPass = 'admin123';
-
-    if (username === defaultUser && password === defaultPass){
-        alert("Login Successfull! Redirecting...");
-       window.location.href("dashboard.html");
-    }
-    else{
-        alert("Invalid Username or Password. Please use the demo credentials.");
-        passwordInput.value = "";
-    }
-});
-
-usernameInput.addEventListener('focus', () =>{
-    usernameInput.classList.add('border-indigo-500');
-});
-    </script>
+<body>
+    
 </body>
 </html>
